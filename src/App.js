@@ -1,24 +1,27 @@
 import './App.css';
-import axios from "axios";
 import { jsPDF } from "jspdf";
-
+import html2canvas from "html2canvas";
 function App() {
-
-  const postData = async (str) => {
-    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-    const result = await axios.post(`https://localhost:5001/api/Values`, { str });
-    const json = await result.json();
-    console.log(json);
+  const postData = async (fileText) => {
+    const result = await fetch("https://localhost:5001/api/Values", {
+      "method":"POST",
+      "mode":"cors",
+      "headers": {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      "body": {"fileText":fileText}
+    });
+    const response = await result.json();
+    console.log(response);
   };
 
   const handleClick = async (e) => {
     const doc = new jsPDF();
     const report = document.getElementById('app');
     doc.html(report);
-    const blob = doc.output('blob');
-    const text = await blob.text();
-    console.log(text);
-    await postData(text);
+    const fileText = doc.output('dataurlstring');
+    console.log(fileText);
+    await postData(fileText);
   };
   return (
     <div className="app">

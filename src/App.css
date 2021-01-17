@@ -1,16 +1,17 @@
 body {
-  font-family: 'B612 Mono', monospace;
+  font-family: "B612 Mono", monospace;
 }
 .app {
   width: 60%;
-  margin:40px auto;
+  margin: 40px auto;
 }
 
 .btn {
   height: 40px;
-  background-color:cornflowerblue;
+  background-color: cornflowerblue;
   color: whitesmoke;
   border: none;
+  font-size: 1.2rem;
   width: 150px;
   font-weight: bold;
   cursor: pointer;
